@@ -1,0 +1,32 @@
+# {{ adv.name }}
+
+**Role:** {{ adv.role }} | **Tier:** {{ adv.tier }}{% if adv.tags %} | **Tags:** {{ adv.tags|join(", ") }}{% endif %}
+
+**Defenses:** {%- for k,v in adv.defenses.items() %} {{k}} {{v}}{%- if not loop.last %}, {% endif %}{% endfor %}
+**Vitality:** {{ adv.vitality }} | **Damage:** {{ adv.damage }}
+
+**Speed:** {%- for k,v in adv.speed.items() %} {{k}} {{v}} ft{%- if not loop.last %}, {% endif %}{% endfor %}
+{%- if adv.senses %}
+**Senses:** {{ adv.senses|join(", ") }}
+{%- endif %}
+{%- if adv.languages %}
+**Languages:** {{ adv.languages|join(", ") }}
+{%- endif %}
+
+### Features
+{%- if adv.features %}
+{%- for f in adv.features %}
+- {{ f }}
+{%- endfor %}
+{%- else %}
+- —
+{%- endif %}
+
+### Moves
+{%- if adv.moves %}
+{%- for m in adv.moves %}
+- **{{ m.name }}**{% if m.trigger %} _(Trigger: {{ m.trigger }})_{% endif %}: {{ m.text }}
+{%- endfor %}
+{%- else %}
+- Strike: Deal {{ adv.damage }} to a close enemy.
+{%- endif %}
